@@ -10,10 +10,11 @@ import java.util.HashMap;
  */
 public class Item
 {
+	private static final HashMap <Integer, Item> ITEMS =new HashMap<>();
 	private final String aName;
 	private final int aId;
 	private final int aPrice; // In cents: 100 = one dollar
-	private static final HashMap <Integer, Item> ITEMS =new HashMap<>();
+	
 	
 	/**
 	 * Creates a new item.
@@ -29,6 +30,12 @@ public class Item
 	}
 	
 	// returns Item, create it if doesn't exist
+	/**
+	 * @param pName name
+	 * @param pId id 
+	 * @param pPrice price
+	 * @return item fitting Id 
+	 */
 	public Item getItem(String pName, int pId, int pPrice)
 	{
 		if (ITEMS.containsKey(pId))

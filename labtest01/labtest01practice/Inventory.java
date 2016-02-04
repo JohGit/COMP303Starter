@@ -11,11 +11,12 @@ import java.util.Map;
  * physical grocery store.
  * Flyweight implementation
  */
-public class Inventory implements Iterable<Item>
+public final class Inventory implements Iterable<Item>
 {
+	private static final HashMap<String, Inventory> INVENTORIES = new HashMap<>();
 	private final String aName; // Unique
 	private final Map<Item, Integer> aInventory = new HashMap<>(); //change to Map from HashMap
-	private static final HashMap<String, Inventory> INVENTORIES = new HashMap<>();
+	
 	
 	/**
 	 * Creates a new inventory with no items in it,
@@ -38,7 +39,11 @@ public class Inventory implements Iterable<Item>
 		
 	}
 	
-	public Inventory getInventory(String pName)
+	/**
+	 * @param pName name
+	 * @return Map
+	 */
+	public static Inventory getInventory(String pName)
 	{
 		if (INVENTORIES.containsKey(pName))
 		{
@@ -107,12 +112,21 @@ public class Inventory implements Iterable<Item>
 			return 0;
 		}
 	}
+	
+	public void printInventory()//Inventory pInventory
+	{
+		for (Item item: this)//(Item item: pInventory)
+		{
+			System.out.println(item.getName()+" "+pAvailable(item));
+		}
+	}
 
 	@Override
 	public Iterator<Item> iterator()
 	{
 		List<Item> temp = new ArrayList<Item>();
-		for (Map.Entry<Item, Integer> entry : aInventory.entrySet()) {
+		for (Map.Entry<Item, Integer> entry : aInventory.entrySet()) 
+		{
 		    //System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
 			temp.add(entry.getKey());
 		}
